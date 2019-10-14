@@ -28,6 +28,9 @@ dependencies:
   geolocator: ^3.0.1
   oktoast: ^2.1.8
   http: ^0.12.0+2
+  camera:
+  path_provider:
+  path:
   flutter_verification_code_input:
     git:
       url: git://github.com/tinylife-io/flutter_verification_code_input.git
