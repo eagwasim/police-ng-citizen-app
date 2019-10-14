@@ -5,9 +5,11 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 class SharedPreferenceUtil {
   static const _CURRENT_USER_KEY = "CURRENT_USER_KEY";
-  static const TERMS_AND_CONDITIONS_ACCEPTED_KEY = "TERMS_AND_CONDITIONS_ACCEPTED_KEY";
   static const _CURRENT_PHONE_NUMBER_FOR_VERIFICATION = "CURRENT_PHONE_NUMBER_FOR_VERIFICATION";
   static const _USER_AUTHENTICATION_TOKEN = "USER_AUTHENTICATION_TOKEN";
+
+  static const TERMS_AND_CONDITIONS_ACCEPTED_KEY = "TERMS_AND_CONDITIONS_ACCEPTED_KEY";
+  static const LATEST_SOS_ID_KEY = "LATEST_SOS_ID_KEY";
 
   static Future<User> currentUser() async {
     final prefs = await SharedPreferences.getInstance();

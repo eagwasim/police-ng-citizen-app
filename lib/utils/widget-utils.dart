@@ -93,4 +93,34 @@ class WidgetUtils {
     );
   }
 
+  static Widget getColoredLoaderWidget(String text, Color color) {
+    return Scaffold(
+      backgroundColor: color,
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: <Widget>[
+            SizedBox(
+              height: 100.0,
+              width: 100.0,
+              child: CircularProgressIndicator(
+                valueColor: AlwaysStoppedAnimation(Colors.white),
+                strokeWidth: 8.0,
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.all(20.0),
+            ),
+            Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Text(
+                  text,
+                  style: TextStyle(color: Colors.white),
+                )),
+          ],
+        ),
+      ),
+    );
+  }
 }

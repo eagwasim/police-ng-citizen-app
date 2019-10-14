@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:police_citizen_app/screens/widgets/misc-list-item.dart';
 import 'package:police_citizen_app/screens/widgets/ordered-list-item.dart';
 import 'package:police_citizen_app/screens/widgets/quick-report-item.dart';
+import 'package:police_citizen_app/utils/route.dart';
 
 class HomeScreen extends StatelessWidget {
   @override
@@ -53,7 +54,9 @@ class HomeScreen extends StatelessWidget {
                           width: 60,
                         ),
                         Colors.red,
-                        () {},
+                        () {
+                          Navigator.pushNamed(context, Routes.SOS_INITIALIZATION_SCREEN);
+                        },
                       ),
                     ),
                     Expanded(
