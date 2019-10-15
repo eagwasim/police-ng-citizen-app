@@ -54,9 +54,12 @@ class _SplashScreenState extends State<SplashScreen> {
               new Positioned(
                 child: new Align(
                     alignment: FractionalOffset.bottomCenter,
-                    child: Text(
-                      "Version 1.0",
-                      style: TextStyle(color: Colors.white),
+                    child: Padding(
+                      padding: const EdgeInsets.all(16.0),
+                      child: Text(
+                        "Version 1.0",
+                        style: TextStyle(color: Colors.white),
+                      ),
                     )),
               )
             ],

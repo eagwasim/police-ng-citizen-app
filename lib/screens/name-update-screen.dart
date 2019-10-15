@@ -160,7 +160,7 @@ class _NameUpdateState extends State<NameUpdateScreen> implements BaseResponseLi
     });
 
     if (response.statusCode == 200) {
-      List<String> fullName = _fullName.split(RegExp("[\s]+"));
+      List<String> fullName = _fullName.split(RegExp(" "));
 
       _user.firstName = fullName[1];
       _user.lastName = fullName[0];

@@ -60,6 +60,7 @@ class _SOSInitializationState extends State<SOSInitializationScreen> implements 
                 padding: EdgeInsets.all(16),
               ),
               Expanded(
+                flex: 1,
                 child: Column(
                   children: <Widget>[
                     Row(
@@ -106,6 +107,7 @@ class _SOSInitializationState extends State<SOSInitializationScreen> implements 
                 ),
               ),
               Expanded(
+                flex: 2,
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[
@@ -164,6 +166,7 @@ class _SOSInitializationState extends State<SOSInitializationScreen> implements 
                 ),
               ),
               Expanded(
+                flex: 1,
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.end,
                   crossAxisAlignment: CrossAxisAlignment.center,

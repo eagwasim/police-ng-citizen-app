@@ -121,10 +121,6 @@ class _PhoneCodeVerificationState extends State implements BaseResponseListener 
 
   @override
   void onResponse(BaseResponse response) {
-    setState(() {
-      _isProcessing = false;
-    });
-
     if (response.statusCode == 201) {
       Future<void> future = () async {
         Map<String, dynamic> decodedResponse = jsonDecode(response.data);
@@ -140,6 +136,9 @@ class _PhoneCodeVerificationState extends State implements BaseResponseListener 
         Navigator.pushNamedAndRemoveUntil(context, await NavigationUtils.getInitialAppRoute(), (Route<dynamic> route) => false);
       });
     } else {
+      setState(() {
+        _isProcessing = false;
+      });
       WidgetUtils.showAlertDialog(context, "Error", response.statusMessage);
     }
   }
