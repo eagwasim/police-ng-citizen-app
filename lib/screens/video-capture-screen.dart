@@ -25,8 +25,6 @@ class _VideoCaptureState extends State<VideoCaptureScreen> {
   void initState() {
     super.initState();
 
-    // Get the listonNewCameraSelected of available cameras.
-    // Then set the first camera as selected.
     availableCameras().then((availableCameras) {
       cameras = availableCameras;
 
@@ -47,7 +45,10 @@ class _VideoCaptureState extends State<VideoCaptureScreen> {
     return Scaffold(
       key: _scaffoldKey,
       appBar: AppBar(
-        title: const Text('Camera example'),
+        title: const Text('Capture Video'),
+        backgroundColor: Colors.grey[50],
+        brightness: Brightness.light,
+        elevation: 0,
       ),
       body: Column(
         children: <Widget>[
@@ -131,7 +132,7 @@ class _VideoCaptureState extends State<VideoCaptureScreen> {
       child: Align(
         alignment: Alignment.centerLeft,
         child:
-            FlatButton.icon(onPressed: _onSwitchCamera, icon: Icon(_getCameraLensIcon(lensDirection)), label: Text("${lensDirection.toString().substring(lensDirection.toString().indexOf('.') + 1)}")),
+        FlatButton.icon(onPressed: _onSwitchCamera, icon: Icon(_getCameraLensIcon(lensDirection)), label: Text("${lensDirection.toString().substring(lensDirection.toString().indexOf('.') + 1)}")),
       ),
     );
   }
@@ -161,7 +162,11 @@ class _VideoCaptureState extends State<VideoCaptureScreen> {
     );
   }
 
-  String timestamp() => DateTime.now().millisecondsSinceEpoch.toString();
+  String timestamp() =>
+      DateTime
+          .now()
+          .millisecondsSinceEpoch
+          .toString();
 
   Future<void> _onCameraSwitched(CameraDescription cameraDescription) async {
     if (controller != null) {
@@ -177,7 +182,9 @@ class _VideoCaptureState extends State<VideoCaptureScreen> {
       }
 
       if (controller.value.hasError) {
-       /* Fluttertoast.showToast(
+        print('Camera error ${controller.value.errorDescription}');
+        /* Fluttertoast.showToast(
+        
             msg: 'Camera error ${controller.value.errorDescription}',
             toastLength: Toast.LENGTH_SHORT,
             gravity: ToastGravity.CENTER,
@@ -212,23 +219,28 @@ class _VideoCaptureState extends State<VideoCaptureScreen> {
   void _onRecordButtonPressed() {
     _startVideoRecording().then((String filePath) {
       if (filePath != null) {
-       /* Fluttertoast.showToast(
+        print('Recording video started');
+        /* Fluttertoast.showToast(
             msg: 'Recording video started', toastLength: Toast.LENGTH_SHORT, gravity: ToastGravity.CENTER, timeInSecForIos: 1, backgroundColor: Colors.grey, textColor: Colors.white);
-    */  }
+    */
+      }
     });
   }
 
   void _onStopButtonPressed() {
     _stopVideoRecording().then((_) {
-      if (mounted) setState(() {});
+      if (mounted) setState(() {
+        print('Video recorded to $videoPath');
+      });
       /*Fluttertoast.showToast(
           msg: 'Video recorded to $videoPath', toastLength: Toast.LENGTH_SHORT, gravity: ToastGravity.CENTER, timeInSecForIos: 1, backgroundColor: Colors.grey, textColor: Colors.white);
-  */  });
+  */
+    });
   }
 
   Future<String> _startVideoRecording() async {
     if (!controller.value.isInitialized) {
-     // Fluttertoast.showToast(msg: 'Please wait', toastLength: Toast.LENGTH_SHORT, gravity: ToastGravity.CENTER, timeInSecForIos: 1, backgroundColor: Colors.grey, textColor: Colors.white);
+      // Fluttertoast.showToast(msg: 'Please wait', toastLength: Toast.LENGTH_SHORT, gravity: ToastGravity.CENTER, timeInSecForIos: 1, backgroundColor: Colors.grey, textColor: Colors.white);
 
       return null;
     }
@@ -241,7 +253,10 @@ class _VideoCaptureState extends State<VideoCaptureScreen> {
     final Directory appDirectory = await getApplicationDocumentsDirectory();
     final String videoDirectory = '${appDirectory.path}/Videos';
     await Directory(videoDirectory).create(recursive: true);
-    final String currentTime = DateTime.now().millisecondsSinceEpoch.toString();
+    final String currentTime = DateTime
+        .now()
+        .millisecondsSinceEpoch
+        .toString();
     final String filePath = '$videoDirectory/${currentTime}.mp4';
 
     try {
@@ -272,7 +287,8 @@ class _VideoCaptureState extends State<VideoCaptureScreen> {
     String errorText = 'Error: ${e.code}\nError Message: ${e.description}';
     print(errorText);
 
-   /* Fluttertoast.showToast(
+    /* Fluttertoast.showToast(
         msg: 'Error: ${e.code}\n${e.description}', toastLength: Toast.LENGTH_SHORT, gravity: ToastGravity.CENTER, timeInSecForIos: 1, backgroundColor: Colors.red, textColor: Colors.white);
- */ }
+ */
+  }
 }

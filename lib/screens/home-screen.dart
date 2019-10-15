@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:police_citizen_app/screens/quick-report-screen.dart';
 import 'package:police_citizen_app/screens/widgets/misc-list-item.dart';
 import 'package:police_citizen_app/screens/widgets/ordered-list-item.dart';
 import 'package:police_citizen_app/screens/widgets/quick-report-item.dart';
@@ -107,17 +108,34 @@ class HomeScreen extends StatelessWidget {
                           QuickReportItem(
                             image: "record_audio_1.png",
                             text: "Send Audio",
-                            callback: () {},
+                            callback: () {
+                              Navigator.pushNamed(
+                                context,
+                                Routes.QUICK_REPORT_SCREEN,
+                                arguments: QuickReportType(
+                                  type: QuickReportScreen.QUICK_REPORT_TYPE_AUDIO,
+                                ),
+                              );
+                            },
                           ),
                           QuickReportItem(
-                            image: "take_photo.png",
-                            text: "Send Photo",
-                            callback: () {},
-                          ),
+                              image: "take_photo.png",
+                              text: "Send Photo",
+                              callback: () {
+                                _optionsDialogBox(context);
+                              }),
                           QuickReportItem(
                             image: "record_video.png",
                             text: "Send Video",
-                            callback: () {},
+                            callback: () {
+                              Navigator.pushNamed(
+                                context,
+                                Routes.QUICK_REPORT_SCREEN,
+                                arguments: QuickReportType(
+                                  type: QuickReportScreen.QUICK_REPORT_TYPE_VIDEO,
+                                ),
+                              );
+                            },
                           )
                         ],
                       )
@@ -216,6 +234,51 @@ class HomeScreen extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  Future<void> _optionsDialogBox(context) {
+    return showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return AlertDialog(
+            content: new SingleChildScrollView(
+              child: new ListBody(
+                children: <Widget>[
+                  GestureDetector(
+                    child: new Text('Take a picture'),
+                    onTap: () {
+                      Navigator.of(context, rootNavigator: true).pop(true);
+
+                      Navigator.pushNamed(
+                        context,
+                        Routes.QUICK_REPORT_SCREEN,
+                        arguments: QuickReportType(
+                          type: QuickReportScreen.QUICK_REPORT_TYPE_PHOTO,
+                        ),
+                      );
+                    },
+                  ),
+                  Padding(
+                    padding: EdgeInsets.all(8.0),
+                  ),
+                  GestureDetector(
+                    child: new Text('Select from gallery'),
+                    onTap: () {
+                      Navigator.of(context, rootNavigator: true).pop(true);
+                      Navigator.pushNamed(
+                        context,
+                        Routes.QUICK_REPORT_SCREEN,
+                        arguments: QuickReportType(
+                          type: QuickReportScreen.QUICK_REPORT_TYPE_PHOTO_GALLERY,
+                        ),
+                      );
+                    },
+                  ),
+                ],
+              ),
+            ),
+          );
+        });
   }
 
   Widget _buildHeaderWidgets(String text, Image image, Color color, VoidCallback onclick) {

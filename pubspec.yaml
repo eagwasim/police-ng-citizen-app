@@ -28,7 +28,9 @@ dependencies:
   geolocator: ^3.0.1
   oktoast: ^2.1.8
   http: ^0.12.0+2
+  mime_type: ^0.2.4
   camera:
+  image_picker:
   path_provider:
   path:
   flutter_verification_code_input:
