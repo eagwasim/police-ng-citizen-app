@@ -24,6 +24,7 @@ dependencies:
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^0.1.2
   shared_preferences: ^0.5.3+4
+  flutter_statusbarcolor: ^0.2.2
   flutter_html: ^0.8.2
   geolocator: ^3.0.1
   oktoast: ^2.1.8

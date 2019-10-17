@@ -20,7 +20,7 @@ class HomeScreen extends StatelessWidget {
           child: Image.asset("assets/images/citizen_app_logo.png"),
         ),
         backgroundColor: Colors.grey[50],
-        brightness: Brightness.light,
+        brightness: Brightness.dark,
         elevation: 0,
         actions: <Widget>[
           Padding(
@@ -68,7 +68,9 @@ class HomeScreen extends StatelessWidget {
                           width: 60,
                         ),
                         Colors.indigo,
-                        () {},
+                        () {
+                          Navigator.pushNamed(context, Routes.REPORT_CATEGORY_SELECTION_SCREEN);
+                        },
                       ),
                     ),
                   ],

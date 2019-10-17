@@ -1,16 +1,8 @@
-import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:flutter/material.dart';
 import 'package:police_citizen_app/models/report-category.dart';
-import 'package:police_citizen_app/utils/widget-utils.dart';
 
-class ReportScreen extends StatefulWidget {
-  @override
-  State<StatefulWidget> createState() {
-    return _ReportState();
-  }
-}
-
-class _ReportState extends State<ReportScreen> {
+class ReportCategorySelectionScreen extends StatelessWidget {
   static final categories = [
     ReportCategory(
       title: "Distress",
@@ -54,22 +46,8 @@ class _ReportState extends State<ReportScreen> {
     ),
   ];
 
-  var _isProcessing = false;
-  var _selectedCategory;
-  var _reportDescripton;
-  var _reportAnon = false;
-  var _contactMe = false;
-
   @override
   Widget build(BuildContext context) {
-    if (_selectedCategory == null) {
-      _selectedCategory = ModalRoute.of(context).settings.arguments;
-    }
-
-    return _isProcessing ? WidgetUtils.getLoaderWidget("Sending Report...") : _buildWidget(context);
-  }
-
-  Widget _buildWidget(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.grey[50],
       appBar: AppBar(
@@ -77,78 +55,60 @@ class _ReportState extends State<ReportScreen> {
           color: Colors.grey[800], //change your color here
         ),
         title: Text(
-          "SEND REPORT",
+          "SELECT REPORT CATEGORY",
           style: TextStyle(color: Colors.grey),
         ),
         backgroundColor: Colors.grey[50],
         brightness: Brightness.light,
         elevation: 0,
-        actions: <Widget>[
-          Padding(
-            padding: const EdgeInsets.all(1.0),
-            child: IconButton(
-              icon: Icon(Icons.send),
-              color: Colors.blue,
-              onPressed: () {},
-            ),
-          )
-        ],
       ),
-      body: SafeArea(child: Column(
-        children: <Widget>[
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: _buildCategoryWidget(),
-          ),
-        ],
+      body: SafeArea(
+          child: Column(
+        children: categories.map((category) {
+          return Expanded(
+            child: Container(
+              color: category.color,
+              child: InkWell(
+                onTap: () {
+                  print("tapped");
+                },
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: <Widget>[
+                    Row(
+                      children: <Widget>[
+                        Expanded(
+                          child: Padding(
+                            padding: const EdgeInsets.all(4.0),
+                            child: Text(
+                              category.title,
+                              style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 20),
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                    Row(
+                      children: <Widget>[
+                        Expanded(
+                          child: Padding(
+                            padding: const EdgeInsets.all(4.0),
+                            child: Text(
+                              category.description,
+                              style: TextStyle(color: Colors.white),
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          );
+        }).toList(),
       )),
-    );
-  }
-
-  Widget _buildCategoryWidget() {
-    return DropdownButton<ReportCategory>(
-      value: _selectedCategory,
-      style: TextStyle(
-        fontSize: 10
-      ),
-      isDense: false,
-      items: categories.map((category) {
-        return DropdownMenuItem<ReportCategory>(
-          value: category,
-          child: Container(
-            color: category.color,
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.start,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: <Widget>[
-                Row(
-                  children: <Widget>[
-                    Text(
-                      category.title,
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontWeight: FontWeight.bold,
-                        fontSize: 15,
-                      ),
-                    ),
-                  ],
-                ),
-                Row(
-                  children: <Widget>[
-                    Text(
-                      category.description,
-                      style: TextStyle(fontSize: 8),
-                    ),
-                  ],
-                ),
-              ],
-            ),
-          ),
-        );
-      }).toList(),
-      onChanged: (value) {
-        this._selectedCategory = value;
-      },
     );
   }
 }

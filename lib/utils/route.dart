@@ -17,4 +17,5 @@ class Routes {
   static const QUICK_REPORT_SCREEN = '/quick-report-screen';
   static const REPORT_SCREEN = '/report-screen';
   static const WANTED_LIST_SCREEN = '/wanted-list-screen';
+  static const REPORT_CATEGORY_SELECTION_SCREEN = '/report-category-selection-screen';
 }

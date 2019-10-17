@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_statusbarcolor/flutter_statusbarcolor.dart';
 import 'package:oktoast/oktoast.dart';
 import 'package:police_citizen_app/screens/audio-capture-screen.dart';
 import 'package:police_citizen_app/screens/emergency-phone-lines-screen.dart';
@@ -11,6 +12,7 @@ import 'package:police_citizen_app/screens/name-update-screen.dart';
 import 'package:police_citizen_app/screens/phone-code-verification-screen.dart';
 import 'package:police_citizen_app/screens/public-notice-screen.dart';
 import 'package:police_citizen_app/screens/quick-report-screen.dart';
+import 'package:police_citizen_app/screens/report-category-selection-screen.dart';
 import 'package:police_citizen_app/screens/report-screen.dart';
 import 'package:police_citizen_app/screens/sos-description-screen.dart';
 import 'package:police_citizen_app/screens/sos-initialization-screen.dart';
@@ -26,10 +28,13 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
+    FlutterStatusbarcolor.setStatusBarColor(Colors.white);
+    FlutterStatusbarcolor.setStatusBarWhiteForeground(false);
+
     return OKToast(
       child: MaterialApp(
         title: 'Police NG',
-        theme: ThemeData(primarySwatch: Colors.indigo),
+        theme: ThemeData(primarySwatch: Colors.deepPurple),
         initialRoute: Routes.SPLASH_SCREEN,
         routes: {
           Routes.SPLASH_SCREEN: (context) => SplashScreen(),
@@ -50,6 +55,7 @@ class MyApp extends StatelessWidget {
           Routes.REPORT_SCREEN: (context) => ReportScreen(),
           Routes.VIDEO_CAPTURE_SCREEN: (context) => VideoCaptureScreen(),
           Routes.WANTED_LIST_SCREEN: (context) => WantedListScreen(),
+          Routes.REPORT_CATEGORY_SELECTION_SCREEN: (context) => ReportCategorySelectionScreen(),
         },
       ),
     );
