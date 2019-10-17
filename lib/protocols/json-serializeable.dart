@@ -1,3 +1,3 @@
-abstract class JSONSerializable<T>{
+abstract class JSONSerializable<T> {
   Map<String, dynamic> toJson();
 }

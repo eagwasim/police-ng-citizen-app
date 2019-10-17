@@ -132,7 +132,7 @@ class _VideoCaptureState extends State<VideoCaptureScreen> {
       child: Align(
         alignment: Alignment.centerLeft,
         child:
-        FlatButton.icon(onPressed: _onSwitchCamera, icon: Icon(_getCameraLensIcon(lensDirection)), label: Text("${lensDirection.toString().substring(lensDirection.toString().indexOf('.') + 1)}")),
+            FlatButton.icon(onPressed: _onSwitchCamera, icon: Icon(_getCameraLensIcon(lensDirection)), label: Text("${lensDirection.toString().substring(lensDirection.toString().indexOf('.') + 1)}")),
       ),
     );
   }
@@ -162,11 +162,7 @@ class _VideoCaptureState extends State<VideoCaptureScreen> {
     );
   }
 
-  String timestamp() =>
-      DateTime
-          .now()
-          .millisecondsSinceEpoch
-          .toString();
+  String timestamp() => DateTime.now().millisecondsSinceEpoch.toString();
 
   Future<void> _onCameraSwitched(CameraDescription cameraDescription) async {
     if (controller != null) {
@@ -229,9 +225,10 @@ class _VideoCaptureState extends State<VideoCaptureScreen> {
 
   void _onStopButtonPressed() {
     _stopVideoRecording().then((_) {
-      if (mounted) setState(() {
-        print('Video recorded to $videoPath');
-      });
+      if (mounted)
+        setState(() {
+          print('Video recorded to $videoPath');
+        });
       /*Fluttertoast.showToast(
           msg: 'Video recorded to $videoPath', toastLength: Toast.LENGTH_SHORT, gravity: ToastGravity.CENTER, timeInSecForIos: 1, backgroundColor: Colors.grey, textColor: Colors.white);
   */
@@ -253,10 +250,7 @@ class _VideoCaptureState extends State<VideoCaptureScreen> {
     final Directory appDirectory = await getApplicationDocumentsDirectory();
     final String videoDirectory = '${appDirectory.path}/Videos';
     await Directory(videoDirectory).create(recursive: true);
-    final String currentTime = DateTime
-        .now()
-        .millisecondsSinceEpoch
-        .toString();
+    final String currentTime = DateTime.now().millisecondsSinceEpoch.toString();
     final String filePath = '$videoDirectory/${currentTime}.mp4';
 
     try {

@@ -1,9 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import 'package:police_citizen_app/models/user.dart';
 import 'package:police_citizen_app/utils/navigation-utils.dart';
-import 'package:police_citizen_app/utils/route.dart';
-import 'package:police_citizen_app/utils/shared-preference-util.dart';
 import 'package:police_citizen_app/utils/widget-utils.dart';
 
 class SplashScreen extends StatefulWidget {

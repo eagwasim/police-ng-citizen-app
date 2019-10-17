@@ -19,7 +19,10 @@ class QuickReportItem extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.center,
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
-              Image.asset("assets/images/$image", height: 25,),
+              Image.asset(
+                "assets/images/$image",
+                height: 25,
+              ),
               Padding(
                 padding: const EdgeInsets.all(4.0),
                 child: Text(text),

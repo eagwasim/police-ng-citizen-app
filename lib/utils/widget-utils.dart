@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:oktoast/oktoast.dart';
 
 class WidgetUtils {
   static BoxDecoration getDefaultGradientBackground() {
@@ -122,5 +123,28 @@ class WidgetUtils {
         ),
       ),
     );
+  }
+
+  static void toastColored(String message, Color backgroundColor, Color textColor) {
+    showToast(
+      message,
+      duration: Duration(seconds: 4),
+      position: ToastPosition.top,
+      backgroundColor: backgroundColor,
+      radius: 5.0,
+      textStyle: TextStyle(fontSize: 16.0, color: textColor),
+    );
+  }
+
+  static void successToast(String message) {
+    toastColored(message, Colors.black, Colors.greenAccent);
+  }
+
+  static void errorToast(String message) {
+    toastColored(message, Colors.black, Colors.redAccent);
+  }
+
+  static void infoToast(String message) {
+    toastColored(message, Colors.black, Colors.blueAccent);
   }
 }

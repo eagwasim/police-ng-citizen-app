@@ -1,11 +1,9 @@
 import 'dart:convert';
-
-import 'package:mime_type/mime_type.dart';
-import 'package:path/path.dart';
-import 'package:async/async.dart';
 import 'dart:io';
 
+import 'package:async/async.dart';
 import 'package:http/http.dart' as http;
+import 'package:path/path.dart';
 import 'package:police_citizen_app/http/base-resource.dart';
 
 class FileResource {
