@@ -120,12 +120,6 @@ class _QuickReportState extends State<QuickReportScreen> implements BaseResponse
           Navigator.pop(context);
           return;
         }
-        print({
-          jsonDecode(response)['id']: {
-            'file_name': path.basename(file.path),
-            'mime_type': mime(path.basename(file.path)),
-          }
-        });
 
         ReportResource.sendQuickReport({
           'lon': position.longitude,

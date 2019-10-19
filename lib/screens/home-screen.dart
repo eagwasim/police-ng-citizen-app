@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:police_citizen_app/models/report-category.dart';
 import 'package:police_citizen_app/screens/quick-report-screen.dart';
 import 'package:police_citizen_app/screens/widgets/misc-list-item.dart';
 import 'package:police_citizen_app/screens/widgets/ordered-list-item.dart';
 import 'package:police_citizen_app/screens/widgets/quick-report-item.dart';
 import 'package:police_citizen_app/utils/route.dart';
+import 'package:police_citizen_app/utils/widget-utils.dart';
 
 class HomeScreen extends StatelessWidget {
   @override
@@ -20,7 +22,7 @@ class HomeScreen extends StatelessWidget {
           child: Image.asset("assets/images/citizen_app_logo.png"),
         ),
         backgroundColor: Colors.grey[50],
-        brightness: Brightness.dark,
+        brightness: Brightness.light,
         elevation: 0,
         actions: <Widget>[
           Padding(
@@ -111,13 +113,7 @@ class HomeScreen extends StatelessWidget {
                             image: "record_audio_1.png",
                             text: "Send Audio",
                             callback: () {
-                              Navigator.pushNamed(
-                                context,
-                                Routes.QUICK_REPORT_SCREEN,
-                                arguments: QuickReportType(
-                                  type: QuickReportScreen.QUICK_REPORT_TYPE_AUDIO,
-                                ),
-                              );
+                              WidgetUtils.infoToast("Feature not availiable at this time...");
                             },
                           ),
                           QuickReportItem(
@@ -130,13 +126,7 @@ class HomeScreen extends StatelessWidget {
                             image: "record_video.png",
                             text: "Send Video",
                             callback: () {
-                              Navigator.pushNamed(
-                                context,
-                                Routes.QUICK_REPORT_SCREEN,
-                                arguments: QuickReportType(
-                                  type: QuickReportScreen.QUICK_REPORT_TYPE_VIDEO,
-                                ),
-                              );
+                              WidgetUtils.infoToast("Feature not availiable at this time...");
                             },
                           )
                         ],
@@ -199,36 +189,17 @@ class HomeScreen extends StatelessWidget {
               child: SingleChildScrollView(
                 scrollDirection: Axis.horizontal,
                 child: new Row(
-                  children: <Widget>[
-                    MiscListItem(
-                      title: "Tip-off",
-                      message: "Click on this card to provide information about any suspicious inividual or activities",
-                      actionButtonColor: Colors.green[900],
-                      actionLabel: "Submit Tip-off",
-                      onclick: () {},
-                    ),
-                    MiscListItem(
-                      title: "Accident",
-                      message: "Click on this card to report a traffic accident involving you or others, hit&run etc",
-                      actionButtonColor: Colors.blue[700],
-                      actionLabel: "Report Accident",
-                      onclick: () {},
-                    ),
-                    MiscListItem(
-                      title: "Public Offence",
-                      message: "Click on this card to report wilding, drug use/possesion, public nuisance, gang activity etc",
-                      actionButtonColor: Colors.indigo[500],
-                      actionLabel: "Report Public Offence",
-                      onclick: () {},
-                    ),
-                    MiscListItem(
-                      title: "Theft/Damages",
-                      message: "Click on this card to report property theft, burglary, arson, vandalization",
-                      actionButtonColor: Colors.indigo[500],
-                      actionLabel: "Theft/Damages",
-                      onclick: () {},
-                    ),
-                  ],
+                  children: allCategories.map((value) {
+                    return MiscListItem(
+                      title: value.title,
+                      message: value.description,
+                      actionButtonColor: value.color,
+                      actionLabel: value.title,
+                      onclick: () {
+                        Navigator.pushNamed(context, Routes.REPORT_SCREEN, arguments: value);
+                      },
+                    );
+                  }).toList(),
                 ),
               ),
             )

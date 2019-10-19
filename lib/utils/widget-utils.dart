@@ -137,14 +137,18 @@ class WidgetUtils {
   }
 
   static void successToast(String message) {
-    toastColored(message, Colors.black, Colors.greenAccent);
+    toastColored(message, Colors.black.withOpacity(0.8), Colors.greenAccent);
   }
 
   static void errorToast(String message) {
-    toastColored(message, Colors.black, Colors.redAccent);
+    toastColored(message, Colors.black.withOpacity(0.8), Colors.redAccent);
   }
 
   static void infoToast(String message) {
-    toastColored(message, Colors.black, Colors.blueAccent);
+    toastColored(message, Colors.black.withOpacity(0.8), Colors.blueAccent);
+  }
+
+  static Color hexToColor(String code) {
+    return new Color(int.parse(code.substring(1, 7), radix: 16) + 0xFF000000);
   }
 }

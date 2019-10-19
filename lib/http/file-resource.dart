@@ -39,4 +39,29 @@ class FileResource {
 
     response.stream.transform(utf8.decoder).listen(listener);
   }
+
+  static Future<String> uploadUrl() async {
+    var response = await http.post(BaseResource.BASE_URL + "$FILE_CONTEXT_PATH/upload/url", body: {});
+
+    if (response.statusCode == 200) {
+      return response.body;
+    }
+
+    return null;
+  }
+
+  static Future<String> uploadFileToUrl(String url, File media) async {
+    var stream = new http.ByteStream(DelegatingStream.typed(media.openRead()));
+    var length = await media.length();
+
+    var uri = Uri.parse(url);
+
+    var request = new http.MultipartRequest("POST", uri);
+    var multipartFile = new http.MultipartFile('file', stream, length, filename: basename(media.path));
+
+    request.files.add(multipartFile);
+
+    var response = await request.send();
+    return await utf8.decodeStream(response.stream);
+  }
 }

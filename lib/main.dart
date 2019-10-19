@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_statusbarcolor/flutter_statusbarcolor.dart';
 import 'package:oktoast/oktoast.dart';
 import 'package:police_citizen_app/screens/audio-capture-screen.dart';
 import 'package:police_citizen_app/screens/emergency-phone-lines-screen.dart';
@@ -28,13 +27,11 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    FlutterStatusbarcolor.setStatusBarColor(Colors.white);
-    FlutterStatusbarcolor.setStatusBarWhiteForeground(false);
-
     return OKToast(
       child: MaterialApp(
+        debugShowCheckedModeBanner: false,
         title: 'Police NG',
-        theme: ThemeData(primarySwatch: Colors.deepPurple),
+        theme: ThemeData(primarySwatch: Colors.indigo),
         initialRoute: Routes.SPLASH_SCREEN,
         routes: {
           Routes.SPLASH_SCREEN: (context) => SplashScreen(),

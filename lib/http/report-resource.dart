@@ -17,4 +17,9 @@ class ReportResource {
   static void sendQuickReport(Map<String, dynamic> payload, BaseResponseListener listener) {
     BaseResource.makePostRequest("$REPORT_CONTEXT_PATH/quick", jsonEncode(payload), listener);
   }
+
+  static void sendReport(Map<String, dynamic> payload, BaseResponseListener listener) {
+    print(payload);
+    BaseResource.makePostRequest("$REPORT_CONTEXT_PATH", jsonEncode(payload), listener);
+  }
 }
