@@ -40,4 +40,40 @@ abstract class BaseResource {
       });
     });
   }
+
+  static void makePutRequest(String url, String data, BaseResponseListener listener) {
+    Map<String, String> headers;
+
+    Future<String> authToken = SharedPreferenceUtil.getToken();
+
+    authToken.then((token) {
+      if (token != null) {
+        headers = {"Content-type": "application/json", "Authorization": "Bearer $token"};
+      } else {
+        headers = {"Content-type": "application/json"};
+      }
+
+      Future<http.Response> futureResponse = http.put(
+        BASE_URL + url,
+        headers: headers,
+        body: data,
+      );
+
+      futureResponse.then((resp) {
+        listener.onResponse(
+          BaseResponse(
+            statusCode: resp.statusCode,
+            statusMessage: resp.reasonPhrase,
+            data: resp.body,
+          ),
+        );
+      }, onError: (error) {
+        listener.onResponse(BaseResponse(
+          statusCode: 500,
+          statusMessage: "Could not process your request, check your internet connection",
+          data: null,
+        ));
+      });
+    });
+  }
 }

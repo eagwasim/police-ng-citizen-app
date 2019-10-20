@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:oktoast/oktoast.dart';
 import 'package:police_citizen_app/screens/audio-capture-screen.dart';
 import 'package:police_citizen_app/screens/emergency-phone-lines-screen.dart';
+import 'package:police_citizen_app/screens/feedback-screen.dart';
 import 'package:police_citizen_app/screens/home-screen.dart';
 import 'package:police_citizen_app/screens/image-capture-screen.dart';
 import 'package:police_citizen_app/screens/locate-police-stations-screen.dart';
@@ -9,10 +10,14 @@ import 'package:police_citizen_app/screens/login-screen.dart';
 import 'package:police_citizen_app/screens/missing-persons-screen.dart';
 import 'package:police_citizen_app/screens/name-update-screen.dart';
 import 'package:police_citizen_app/screens/phone-code-verification-screen.dart';
+import 'package:police_citizen_app/screens/privacy-screen.dart';
+import 'package:police_citizen_app/screens/profile-update-screen.dart';
 import 'package:police_citizen_app/screens/public-notice-screen.dart';
 import 'package:police_citizen_app/screens/quick-report-screen.dart';
 import 'package:police_citizen_app/screens/report-category-selection-screen.dart';
 import 'package:police_citizen_app/screens/report-screen.dart';
+import 'package:police_citizen_app/screens/report-sent-success-screen.dart';
+import 'package:police_citizen_app/screens/settings-screen.dart';
 import 'package:police_citizen_app/screens/sos-description-screen.dart';
 import 'package:police_citizen_app/screens/sos-initialization-screen.dart';
 import 'package:police_citizen_app/screens/splash-screen.dart';
@@ -53,6 +58,11 @@ class MyApp extends StatelessWidget {
           Routes.VIDEO_CAPTURE_SCREEN: (context) => VideoCaptureScreen(),
           Routes.WANTED_LIST_SCREEN: (context) => WantedListScreen(),
           Routes.REPORT_CATEGORY_SELECTION_SCREEN: (context) => ReportCategorySelectionScreen(),
+          Routes.REPORT_SENT_SUCCESS_SCREEN: (context) => ReportSentSuccessScreen(),
+          Routes.PROFILE_SCREEN: (context) => ProfileUpdateScreen(),
+          Routes.SETTINGS_SCREEN: (context) => SettingsScreen(),
+          Routes.FEEDBACK_SCREEN: (context) => FeedbackScreen(),
+          Routes.PRIVACY_AND_TERMS_SCREEN: (context) => PrivacyScreen(),
         },
       ),
     );

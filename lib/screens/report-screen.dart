@@ -9,6 +9,7 @@ import 'package:police_citizen_app/http/file-resource.dart';
 import 'package:police_citizen_app/http/report-resource.dart';
 import 'package:police_citizen_app/http/response/base-response.dart';
 import 'package:police_citizen_app/models/report-category.dart';
+import 'package:police_citizen_app/utils/route.dart';
 import 'package:police_citizen_app/utils/widget-utils.dart';
 import 'package:path/path.dart' as path;
 
@@ -24,7 +25,7 @@ class _ReportState extends State<ReportScreen> implements BaseResponseListener {
 
   bool _isProcessing = false;
   ReportCategory _selectedCategory;
-  String _reportDescripton;
+  String _reportDescription;
   bool _reportAnon = false;
   bool _contactMe = false;
 
@@ -61,9 +62,9 @@ class _ReportState extends State<ReportScreen> implements BaseResponseListener {
               icon: Icon(Icons.send),
               color: Colors.blue,
               onPressed: () {
-                _reportDescripton = _descriptionController.text;
-                if (_reportDescripton.length > 10) {
-                  _submitReport();
+                _reportDescription = _descriptionController.text;
+                if (_reportDescription.length > 10) {
+                  _showSubmitAlertDialog();
                 }
               },
             ),
@@ -283,7 +284,7 @@ class _ReportState extends State<ReportScreen> implements BaseResponseListener {
       builder: (BuildContext context) {
         return AlertDialog(
           content: new SingleChildScrollView(
-            child: new ListBody(
+            child:  ListBody(
               children: <Widget>[
                 GestureDetector(
                   child: new Text('Take a picture'),
@@ -334,6 +335,56 @@ class _ReportState extends State<ReportScreen> implements BaseResponseListener {
     }
   }
 
+  _showSubmitAlertDialog() {
+    // flutter defined function
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        // return object of type Dialog
+        return AlertDialog(
+          title: Image.asset(
+            "assets/images/action_prompt_logo.png",
+            width: 60,
+            height: 60,
+          ),
+          content: SingleChildScrollView(
+            child: ListBody(
+              children: <Widget>[
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Text("Legal action may be taken against you if you intentionally submit a false report or for misuse of this application."),
+                ),
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Text(
+                    "Are you sure you want to submit this report?",
+                    style: TextStyle(color: Colors.red),
+                  ),
+                ),
+              ],
+            ),
+          ),
+          actions: <Widget>[
+            // usually buttons at the bottom of the dialog
+            FlatButton(
+              child: new Text("CANCEL", style: TextStyle(color: Colors.red),),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+            ),
+            FlatButton(
+              child: new Text("SEND"),
+              onPressed: () {
+                Navigator.of(context).pop();
+                _submitReport();
+              },
+            ),
+          ],
+        );
+      },
+    );
+  }
+
   void _submitReport() async {
     setState(() {
       _isProcessing = true;
@@ -379,7 +430,7 @@ class _ReportState extends State<ReportScreen> implements BaseResponseListener {
     var payload = {
       'type': _selectedCategory.type,
       'title': _selectedCategory.title,
-      'detail': _reportDescripton,
+      'detail': _reportDescription,
       'anon': _reportAnon,
       'contact_me': _contactMe,
       'location': {
@@ -395,8 +446,7 @@ class _ReportState extends State<ReportScreen> implements BaseResponseListener {
   @override
   void onResponse(BaseResponse response) {
     if (response.statusCode == 200) {
-      WidgetUtils.successToast("Report Sent!");
-      Navigator.pop(context);
+      Navigator.pushReplacementNamed(context, Routes.REPORT_SENT_SUCCESS_SCREEN, arguments: jsonDecode(response.data)['data']['report_id']);
     } else {
       WidgetUtils.errorToast("Quick Report Sending Failed!");
       setState(() {

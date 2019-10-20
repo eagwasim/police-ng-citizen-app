@@ -33,7 +33,7 @@ final allCategories =  [
     type: "PUBLIC_OFFENCE",
   ),
   ReportCategory(
-    title: "Citizen’s Watch / Tip-off",
+    title: "Citizen's Watch / Tip-off",
     description: "Give info about Wanted persons, Missing persons, Missing Items, Election crimes, Cybercrime, Officer misconduct etc",
     color: Colors.green[700],
     type: "CITIZENS_WATCH_OR_TIP_OFF",

@@ -18,4 +18,9 @@ class Routes {
   static const REPORT_SCREEN = '/report-screen';
   static const WANTED_LIST_SCREEN = '/wanted-list-screen';
   static const REPORT_CATEGORY_SELECTION_SCREEN = '/report-category-selection-screen';
+  static const REPORT_SENT_SUCCESS_SCREEN = '/report-sent-success-screen';
+  static const PROFILE_SCREEN = '/profile-screen';
+  static const SETTINGS_SCREEN = '/settings-screen';
+  static const FEEDBACK_SCREEN = '/feedback-screen';
+  static const PRIVACY_AND_TERMS_SCREEN = '/privacy-and-terms-screen';
 }

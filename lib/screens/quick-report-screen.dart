@@ -141,8 +141,7 @@ class _QuickReportState extends State<QuickReportScreen> implements BaseResponse
   @override
   void onResponse(BaseResponse response) {
     if (response.statusCode == 200) {
-      WidgetUtils.successToast("Quick Report Sent!");
-      Navigator.pop(context);
+      Navigator.pushReplacementNamed(context, Routes.REPORT_SENT_SUCCESS_SCREEN, arguments: jsonDecode(response.data)['data']['report_id']);
     } else {
       WidgetUtils.errorToast("Quick Report Sending Failed!");
       Navigator.pop(context);

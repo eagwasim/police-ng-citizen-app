@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 
 class MissingPersonsScreen extends StatefulWidget {
@@ -10,6 +11,9 @@ class MissingPersonsScreen extends StatefulWidget {
 class _MissingPersonsState extends State<MissingPersonsScreen> {
   @override
   Widget build(BuildContext context) {
-    return Container();
+    return Scaffold(
+      appBar: AppBar(),
+      body: Container(),
+    );
   }
 }

@@ -19,7 +19,10 @@ class ReportResource {
   }
 
   static void sendReport(Map<String, dynamic> payload, BaseResponseListener listener) {
-    print(payload);
     BaseResource.makePostRequest("$REPORT_CONTEXT_PATH", jsonEncode(payload), listener);
+  }
+
+  static void sendReportUpdate(String reportId, Map<String, dynamic> payload, BaseResponseListener listener) {
+    BaseResource.makePutRequest("$REPORT_CONTEXT_PATH/$reportId", jsonEncode(payload), listener);
   }
 }

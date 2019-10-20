@@ -17,7 +17,7 @@ class MiscListItem extends StatelessWidget {
       child: Padding(
         padding: const EdgeInsets.all(4.0),
         child: Card(
-          elevation: 4.0,
+
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(16.0),
           ),

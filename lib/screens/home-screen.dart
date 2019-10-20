@@ -7,6 +7,22 @@ import 'package:police_citizen_app/screens/widgets/quick-report-item.dart';
 import 'package:police_citizen_app/utils/route.dart';
 import 'package:police_citizen_app/utils/widget-utils.dart';
 
+class Choice {
+  const Choice({this.title, this.icon, this.route});
+
+  final String title;
+  final IconData icon;
+  final String route;
+}
+
+const List<Choice> choices = const <Choice>[
+  const Choice(title: 'PROFILE', icon: Icons.account_circle, route: Routes.PROFILE_SCREEN),
+  const Choice(title: 'REPORT HISTROY', icon: Icons.history, route: Routes.SETTINGS_SCREEN),
+  const Choice(title: 'SETTING', icon: Icons.settings, route: Routes.SETTINGS_SCREEN),
+  const Choice(title: 'FEEDBACK', icon: Icons.feedback, route: Routes.FEEDBACK_SCREEN),
+  const Choice(title: 'PRIVACY/TERMS', icon: Icons.verified_user, route: Routes.PRIVACY_AND_TERMS_SCREEN),
+];
+
 class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -18,22 +34,45 @@ class HomeScreen extends StatelessWidget {
           style: TextStyle(color: Colors.grey),
         ),
         leading: Padding(
-          padding: const EdgeInsets.all(10.0),
+          padding: const EdgeInsets.all(12.0),
           child: Image.asset("assets/images/citizen_app_logo.png"),
         ),
         backgroundColor: Colors.grey[50],
         brightness: Brightness.light,
         elevation: 0,
         actions: <Widget>[
-          Padding(
-            padding: const EdgeInsets.all(1.0),
-            child: IconButton(
-              icon: Icon(Icons.account_circle),
+          PopupMenuButton<Choice>(
+            onSelected: (choice) {
+              Navigator.pushNamed(context, choice.route);
+            },
+            icon: Icon(
+              Icons.account_circle,
               color: Colors.grey,
-              iconSize: 35,
-              onPressed: () {},
+              size: 30,
             ),
-          )
+            itemBuilder: (BuildContext context) {
+              return choices.map((Choice choice) {
+                return PopupMenuItem<Choice>(
+                  value: choice,
+                  child: Row(
+                    children: <Widget>[
+                      Padding(
+                        padding: const EdgeInsets.only(top: 2.0, bottom: 2.0, left: 0.0, right: 8.0),
+                        child: Icon(
+                          choice.icon,
+                          color: Colors.grey[700],
+                        ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.only(top: 2.0, bottom: 2.0, left: 2.0, right: 0.0),
+                        child: Text(choice.title, style: TextStyle(color: Colors.grey[700])),
+                      ),
+                    ],
+                  ),
+                );
+              }).toList();
+            },
+          ),
         ],
       ),
       body: SafeArea(
@@ -84,7 +123,6 @@ class HomeScreen extends StatelessWidget {
               child: Padding(
                 padding: const EdgeInsets.all(4.0),
                 child: Card(
-                  elevation: 4.0,
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(16.0),
                   ),
@@ -141,7 +179,6 @@ class HomeScreen extends StatelessWidget {
               child: Padding(
                 padding: const EdgeInsets.all(4.0),
                 child: Card(
-                  elevation: 4.0,
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(16.0),
                   ),
@@ -152,31 +189,41 @@ class HomeScreen extends StatelessWidget {
                         OrderedListItem(
                           imageAsset: "emergency_lines.png",
                           textLabel: "Emergency Phone Lines",
-                          callback: () {},
+                          callback: () {
+                            Navigator.pushNamed(context, Routes.EMERGENCY_PHONE_LINES_SCREEN);
+                          },
                         ),
                         Divider(),
                         OrderedListItem(
                           imageAsset: "locate_stations.png",
                           textLabel: "Locate Police Stations",
-                          callback: () {},
+                          callback: () {
+                            Navigator.pushNamed(context, Routes.LOCATE_POLICE_STATION_SCREEN);
+                          },
                         ),
                         Divider(),
                         OrderedListItem(
                           imageAsset: "most_wanted.png",
                           textLabel: "Wanted List",
-                          callback: () {},
+                          callback: () {
+                            Navigator.pushNamed(context, Routes.WANTED_LIST_SCREEN);
+                          },
                         ),
                         Divider(),
                         OrderedListItem(
                           imageAsset: "missing_items.png",
                           textLabel: "Missing Persons/Items",
-                          callback: () {},
+                          callback: () {
+                            Navigator.pushNamed(context, Routes.MISSING_PERSONS_SCREEN);
+                          },
                         ),
                         Divider(),
                         OrderedListItem(
                           imageAsset: "notices.png",
                           textLabel: "Public Notices",
-                          callback: () {},
+                          callback: () {
+                            Navigator.pushNamed(context, Routes.PUBLIC_NOTICE_SCREEN);
+                          },
                         )
                       ],
                     ),
@@ -257,7 +304,6 @@ class HomeScreen extends StatelessWidget {
   Widget _buildHeaderWidgets(String text, Image image, Color color, VoidCallback onclick) {
     return Card(
       color: color,
-      elevation: 4.0,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(20.0),
       ),
