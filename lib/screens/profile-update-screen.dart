@@ -9,7 +9,6 @@ import 'package:police_citizen_app/utils/widget-utils.dart';
 class ProfileUpdateScreen extends StatefulWidget {
   @override
   State<StatefulWidget> createState() {
-    // TODO: implement createState
     return _ProfileUpdateState();
   }
 }
