@@ -17,6 +17,7 @@ import 'package:police_citizen_app/screens/quick-report-screen.dart';
 import 'package:police_citizen_app/screens/report-category-selection-screen.dart';
 import 'package:police_citizen_app/screens/report-screen.dart';
 import 'package:police_citizen_app/screens/report-sent-success-screen.dart';
+import 'package:police_citizen_app/screens/reports-history-screen.dart';
 import 'package:police_citizen_app/screens/settings-screen.dart';
 import 'package:police_citizen_app/screens/sos-description-screen.dart';
 import 'package:police_citizen_app/screens/sos-initialization-screen.dart';
@@ -63,6 +64,7 @@ class MyApp extends StatelessWidget {
           Routes.SETTINGS_SCREEN: (context) => SettingsScreen(),
           Routes.FEEDBACK_SCREEN: (context) => FeedbackScreen(),
           Routes.PRIVACY_AND_TERMS_SCREEN: (context) => PrivacyScreen(),
+          Routes.REPORTS_HISTORY_SCREEN: (context) => ReportsHistoryScreen(),
         },
       ),
     );

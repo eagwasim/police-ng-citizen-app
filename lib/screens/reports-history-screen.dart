@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 
-class PublicNoticeScreen extends StatefulWidget {
+class ReportsHistoryScreen extends StatefulWidget {
   @override
   State<StatefulWidget> createState() {
-    return _PublicNoticeState();
+    return _ReportsHistoryState();
   }
 }
 
-class _PublicNoticeState extends State<PublicNoticeScreen> {
+class _ReportsHistoryState extends State<ReportsHistoryScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -17,7 +17,7 @@ class _PublicNoticeState extends State<PublicNoticeScreen> {
           color: Colors.grey[800], //change your color here
         ),
         title: Text(
-          "Public Notice",
+          "Reports History",
           style: TextStyle(color: Colors.grey),
         ),
         backgroundColor: Colors.grey[50],

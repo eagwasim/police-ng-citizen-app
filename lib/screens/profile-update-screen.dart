@@ -49,7 +49,7 @@ class _ProfileUpdateState extends State<ProfileUpdateScreen> implements BaseResp
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          "Profile",
+          "Account",
           style: TextStyle(color: Colors.grey),
         ),
         backgroundColor: Colors.grey[50],

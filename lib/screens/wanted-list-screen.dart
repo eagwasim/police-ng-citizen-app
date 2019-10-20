@@ -12,7 +12,18 @@ class _WantedListState extends State<WantedListScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(),
+      appBar: AppBar(
+        iconTheme: IconThemeData(
+          color: Colors.grey[800], //change your color here
+        ),
+        title: Text(
+          "Wanted List",
+          style: TextStyle(color: Colors.grey),
+        ),
+        backgroundColor: Colors.grey[50],
+        brightness: Brightness.light,
+        elevation: 0,
+      ),
       body: Container(),
     );
   }

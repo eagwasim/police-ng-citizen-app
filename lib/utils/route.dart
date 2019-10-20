@@ -23,4 +23,5 @@ class Routes {
   static const SETTINGS_SCREEN = '/settings-screen';
   static const FEEDBACK_SCREEN = '/feedback-screen';
   static const PRIVACY_AND_TERMS_SCREEN = '/privacy-and-terms-screen';
+  static const REPORTS_HISTORY_SCREEN = '/reports-history-screen';
 }

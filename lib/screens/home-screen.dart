@@ -16,8 +16,8 @@ class Choice {
 }
 
 const List<Choice> choices = const <Choice>[
-  const Choice(title: 'PROFILE', icon: Icons.account_circle, route: Routes.PROFILE_SCREEN),
-  const Choice(title: 'REPORT HISTROY', icon: Icons.history, route: Routes.SETTINGS_SCREEN),
+  const Choice(title: 'ACCOUNT', icon: Icons.account_circle, route: Routes.PROFILE_SCREEN),
+  const Choice(title: 'REPORT HISTROY', icon: Icons.history, route: Routes.REPORTS_HISTORY_SCREEN),
   const Choice(title: 'SETTING', icon: Icons.settings, route: Routes.SETTINGS_SCREEN),
   const Choice(title: 'FEEDBACK', icon: Icons.feedback, route: Routes.FEEDBACK_SCREEN),
   const Choice(title: 'PRIVACY/TERMS', icon: Icons.verified_user, route: Routes.PRIVACY_AND_TERMS_SCREEN),
