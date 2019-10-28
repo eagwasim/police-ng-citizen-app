@@ -9,6 +9,7 @@ import 'package:image_picker/image_picker.dart';
 import 'package:police_citizen_app/http/file-resource.dart';
 import 'package:police_citizen_app/http/report-resource.dart';
 import 'package:police_citizen_app/http/response/base-response.dart';
+import 'package:police_citizen_app/utils/navigation-utils.dart';
 import 'package:police_citizen_app/utils/route.dart';
 import 'package:police_citizen_app/utils/widget-utils.dart';
 import 'package:path/path.dart' as path;
@@ -114,7 +115,7 @@ class _QuickReportState extends State<QuickReportScreen> implements BaseResponse
     Future<Position> futurePosition = Geolocator().getCurrentPosition(desiredAccuracy: LocationAccuracy.high);
 
     futurePosition.then((position) {
-      FileResource.uploadFile(file, (response) {
+      FileResource.uploadFile(file, (response) async {
         if (response == null) {
           WidgetUtils.errorToast("Could not get your current location!");
           Navigator.pop(context);
@@ -124,6 +125,7 @@ class _QuickReportState extends State<QuickReportScreen> implements BaseResponse
         ReportResource.sendQuickReport({
           'lon': position.longitude,
           'lat': position.latitude,
+          'address': await NavigationUtils.addressFromCoordinates(position.latitude, position.longitude),
           'media': {
             jsonDecode(response)['id'].toString(): {
               'file_name': path.basename(file.path),

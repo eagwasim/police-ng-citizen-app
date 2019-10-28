@@ -10,7 +10,6 @@ class QuickReportItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // TODO: implement build
     return Expanded(
       child: InkWell(
         child: Padding(
@@ -21,10 +20,10 @@ class QuickReportItem extends StatelessWidget {
             children: <Widget>[
               Image.asset(
                 "assets/images/$image",
-                height: 25,
+                height: 40,
               ),
               Padding(
-                padding: const EdgeInsets.all(4.0),
+                padding: const EdgeInsets.all(8.0),
                 child: Text(text),
               ),
             ],

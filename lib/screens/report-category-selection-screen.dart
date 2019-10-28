@@ -23,47 +23,45 @@ class ReportCategorySelectionScreen extends StatelessWidget {
         elevation: 0,
       ),
       body: SafeArea(
-          child: Column(
+          child: ListView(
         children: categories.map((category) {
-          return Expanded(
-            child: Container(
-              color: category.color,
-              child: InkWell(
-                onTap: () {
-                  Navigator.pushReplacementNamed(context, Routes.REPORT_SCREEN, arguments: category);
-                },
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: <Widget>[
-                    Row(
-                      children: <Widget>[
-                        Expanded(
-                          child: Padding(
-                            padding: const EdgeInsets.all(4.0),
-                            child: Text(
-                              category.title,
-                              style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 20),
-                            ),
+          return Container(
+            color: category.color,
+            child: InkWell(
+              onTap: () {
+                Navigator.pushReplacementNamed(context, Routes.REPORT_SCREEN, arguments: category);
+              },
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: <Widget>[
+                  Row(
+                    children: <Widget>[
+                      Expanded(
+                        child: Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Text(
+                            category.title,
+                            style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 20),
                           ),
                         ),
-                      ],
-                    ),
-                    Row(
-                      children: <Widget>[
-                        Expanded(
-                          child: Padding(
-                            padding: const EdgeInsets.all(4.0),
-                            child: Text(
-                              category.description,
-                              style: TextStyle(color: Colors.white),
-                            ),
+                      ),
+                    ],
+                  ),
+                  Row(
+                    children: <Widget>[
+                      Expanded(
+                        child: Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Text(
+                            category.description,
+                            style: TextStyle(color: Colors.white),
                           ),
                         ),
-                      ],
-                    ),
-                  ],
-                ),
+                      ),
+                    ],
+                  ),
+                ],
               ),
             ),
           );

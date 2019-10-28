@@ -9,6 +9,7 @@ import 'package:police_citizen_app/http/file-resource.dart';
 import 'package:police_citizen_app/http/report-resource.dart';
 import 'package:police_citizen_app/http/response/base-response.dart';
 import 'package:police_citizen_app/models/report-category.dart';
+import 'package:police_citizen_app/utils/navigation-utils.dart';
 import 'package:police_citizen_app/utils/route.dart';
 import 'package:police_citizen_app/utils/widget-utils.dart';
 import 'package:path/path.dart' as path;
@@ -28,9 +29,32 @@ class _ReportState extends State<ReportScreen> implements BaseResponseListener {
   String _reportDescription;
   bool _reportAnon = false;
   bool _contactMe = false;
+  Position position;
+  String address;
 
   final _descriptionController = TextEditingController();
+  final _addressController = TextEditingController();
+
   final _files = [];
+
+  @override
+  void initState() {
+    super.initState();
+    Future.delayed(Duration(seconds: 2), () async {
+      position = await Geolocator().getCurrentPosition(desiredAccuracy: LocationAccuracy.high);
+      address = await NavigationUtils.addressFromCoordinates(position.latitude, position.longitude);
+      setState(() {
+        _addressController.text = address;
+      });
+    });
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    _descriptionController.dispose();
+    _addressController.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -227,6 +251,29 @@ class _ReportState extends State<ReportScreen> implements BaseResponseListener {
               ),
             ),
           ),
+          Padding(
+              padding: EdgeInsets.all(8.0),
+              child: Card(
+                child: Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: TextFormField(
+                    controller: _addressController,
+                    maxLines: 4,
+                    minLines: 4,
+                    textAlign: TextAlign.start,
+                    decoration: new InputDecoration(
+                      labelText: "Address Details",
+                      fillColor: Colors.white,
+                      border: new OutlineInputBorder(
+                        borderRadius: new BorderRadius.circular(5.0),
+                        borderSide: new BorderSide(),
+                      ),
+                      //fillColor: Colors.green
+                    ),
+                    keyboardType: TextInputType.text,
+                  ),
+                ),
+              ))
         ],
       )),
     );
@@ -284,7 +331,7 @@ class _ReportState extends State<ReportScreen> implements BaseResponseListener {
       builder: (BuildContext context) {
         return AlertDialog(
           content: new SingleChildScrollView(
-            child:  ListBody(
+            child: ListBody(
               children: <Widget>[
                 GestureDetector(
                   child: new Text('Take a picture'),
@@ -367,7 +414,10 @@ class _ReportState extends State<ReportScreen> implements BaseResponseListener {
           actions: <Widget>[
             // usually buttons at the bottom of the dialog
             FlatButton(
-              child: new Text("CANCEL", style: TextStyle(color: Colors.red),),
+              child: new Text(
+                "CANCEL",
+                style: TextStyle(color: Colors.red),
+              ),
               onPressed: () {
                 Navigator.of(context).pop();
               },
@@ -420,8 +470,6 @@ class _ReportState extends State<ReportScreen> implements BaseResponseListener {
       });
     }
 
-    var position = await Geolocator().getCurrentPosition(desiredAccuracy: LocationAccuracy.high);
-
     if (position == null) {
       WidgetUtils.errorToast("You must enable location retrival to send a quick report");
       Navigator.pop(context);
@@ -437,7 +485,8 @@ class _ReportState extends State<ReportScreen> implements BaseResponseListener {
         'lon': position.longitude,
         'lat': position.latitude,
       },
-      'media': uploadedMedia
+      'media': uploadedMedia,
+      'address': _addressController.text
     };
 
     ReportResource.sendReport(payload, this);

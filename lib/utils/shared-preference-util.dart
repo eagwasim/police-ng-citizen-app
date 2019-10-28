@@ -7,7 +7,6 @@ class SharedPreferenceUtil {
   static const _CURRENT_USER_KEY = "CURRENT_USER_KEY";
   static const _CURRENT_PHONE_NUMBER_FOR_VERIFICATION = "CURRENT_PHONE_NUMBER_FOR_VERIFICATION";
   static const _USER_AUTHENTICATION_TOKEN = "USER_AUTHENTICATION_TOKEN";
-
   static const TERMS_AND_CONDITIONS_ACCEPTED_KEY = "TERMS_AND_CONDITIONS_ACCEPTED_KEY";
   static const LATEST_SOS_ID_KEY = "LATEST_SOS_ID_KEY";
 
@@ -25,7 +24,11 @@ class SharedPreferenceUtil {
 
   static Future<void> saveUser(User user) async {
     final prefs = await SharedPreferences.getInstance();
-    prefs.setString(_CURRENT_USER_KEY, jsonEncode(user.toJson()));
+    if (user == null) {
+      prefs.remove(_CURRENT_USER_KEY);
+    } else {
+      prefs.setString(_CURRENT_USER_KEY, jsonEncode(user.toJson()));
+    }
   }
 
   static Future<int> getInt(String key, int defaultValue) async {
@@ -66,5 +69,13 @@ class SharedPreferenceUtil {
   static Future<String> getToken() async {
     final prefs = await SharedPreferences.getInstance();
     return prefs.getString(_USER_AUTHENTICATION_TOKEN);
+  }
+
+  static Future<void> logout() async {
+    final prefs = await SharedPreferences.getInstance();
+    prefs.remove(_CURRENT_USER_KEY);
+    prefs.remove(_USER_AUTHENTICATION_TOKEN);
+    prefs.remove(LATEST_SOS_ID_KEY);
+    prefs.remove(TERMS_AND_CONDITIONS_ACCEPTED_KEY);
   }
 }

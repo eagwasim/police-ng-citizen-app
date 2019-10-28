@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:http/http.dart' as http;
 import 'package:police_citizen_app/http/response/base-response.dart';
 import 'package:police_citizen_app/utils/shared-preference-util.dart';
@@ -24,11 +26,20 @@ abstract class BaseResource {
       );
 
       futureResponse.then((resp) {
+        String responseBody = resp.body;
+        String errorMessage;
+
+        if (responseBody != null) {
+          try {
+            Map<String, dynamic> payload = jsonDecode(errorMessage);
+            errorMessage = payload.containsKey("message") ? payload['message'] : null;
+          } catch (e) {}
+        }
         listener.onResponse(
           BaseResponse(
             statusCode: resp.statusCode,
-            statusMessage: resp.reasonPhrase,
-            data: resp.body,
+            statusMessage: errorMessage == null ? resp.reasonPhrase : errorMessage,
+            data: responseBody,
           ),
         );
       }, onError: (error) {
@@ -60,11 +71,20 @@ abstract class BaseResource {
       );
 
       futureResponse.then((resp) {
+        String responseBody = resp.body;
+        String errorMessage;
+
+        if (responseBody != null) {
+          try {
+            Map<String, dynamic> payload = jsonDecode(errorMessage);
+            errorMessage = payload.containsKey("message") ? payload['message'] : null;
+          } catch (e) {}
+        }
         listener.onResponse(
           BaseResponse(
             statusCode: resp.statusCode,
-            statusMessage: resp.reasonPhrase,
-            data: resp.body,
+            statusMessage: errorMessage == null ? resp.reasonPhrase : errorMessage,
+            data: responseBody,
           ),
         );
       }, onError: (error) {

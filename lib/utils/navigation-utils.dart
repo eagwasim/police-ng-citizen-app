@@ -1,3 +1,4 @@
+import 'package:geocoder/geocoder.dart';
 import 'package:police_citizen_app/models/user.dart';
 import 'package:police_citizen_app/utils/route.dart';
 import 'package:police_citizen_app/utils/shared-preference-util.dart';
@@ -18,5 +19,11 @@ class NavigationUtils {
         return Routes.HOME_SCREEN;
       }
     }
+  }
+
+  static Future<String> addressFromCoordinates(double latitude, double longitude) async {
+    var addresses = await Geocoder.local.findAddressesFromCoordinates(Coordinates(latitude, longitude));
+    var first = addresses.first;
+    return first.addressLine;
   }
 }

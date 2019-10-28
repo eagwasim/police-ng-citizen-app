@@ -9,8 +9,10 @@ class User extends JSONSerializable<User> {
   String nin;
   String profilePhoto;
   String houseAddress;
+  List<String> roles;
+  int id;
 
-  User({this.firstName, this.lastName, this.phoneNumber, this.bvn, this.nin, this.profilePhoto, this.houseAddress, this.emailAddress});
+  User({this.firstName, this.lastName, this.phoneNumber, this.bvn, this.nin, this.profilePhoto, this.houseAddress, this.emailAddress, this.id, this.roles});
 
   User.fromJson(Map<String, dynamic> json)
       : firstName = json['first_name'] ?? null,
@@ -20,6 +22,8 @@ class User extends JSONSerializable<User> {
         nin = json['nin'] ?? null,
         profilePhoto = json['profile_photo'] ?? null,
         emailAddress = json['email_address'] ?? null,
+        roles = json['role'] ?? null,
+        id = json['id'] ?? null,
         houseAddress = json['house_address'] ?? null;
 
   @override
@@ -32,7 +36,9 @@ class User extends JSONSerializable<User> {
       'nin': nin,
       'profile_photo': profilePhoto,
       'house_address': houseAddress,
-      'email_address': emailAddress
+      'email_address': emailAddress,
+      'roles': roles,
+      'id': id
     };
   }
 }

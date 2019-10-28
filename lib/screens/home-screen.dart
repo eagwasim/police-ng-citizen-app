@@ -75,57 +75,54 @@ class HomeScreen extends StatelessWidget {
           ),
         ],
       ),
-      body: SafeArea(
+      body: SingleChildScrollView(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: <Widget>[
-            Expanded(
-              flex: 1,
-              child: Padding(
-                padding: const EdgeInsets.all(4.0),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: <Widget>[
-                    Expanded(
-                      child: _buildHeaderWidgets(
-                        "SOS",
-                        Image.asset(
-                          "assets/images/sos.png",
-                          width: 60,
-                        ),
-                        Colors.red,
-                        () {
-                          Navigator.pushNamed(context, Routes.SOS_INITIALIZATION_SCREEN);
-                        },
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: <Widget>[
+                  Expanded(
+                    child: _buildHeaderWidgets(
+                      "SOS",
+                      Image.asset(
+                        "assets/images/sos.png",
+                        width: 80,
                       ),
+                      Colors.red,
+                      () {
+                        Navigator.pushNamed(context, Routes.SOS_INITIALIZATION_SCREEN);
+                      },
                     ),
-                    Expanded(
-                      child: _buildHeaderWidgets(
-                        "Report",
-                        Image.asset(
-                          "assets/images/send_report.png",
-                          width: 60,
-                        ),
-                        Colors.indigo,
-                        () {
-                          Navigator.pushNamed(context, Routes.REPORT_CATEGORY_SELECTION_SCREEN);
-                        },
+                  ),
+                  Expanded(
+                    child: _buildHeaderWidgets(
+                      "Report",
+                      Image.asset(
+                        "assets/images/send_report.png",
+                        width: 80,
                       ),
+                      Colors.indigo,
+                      () {
+                        Navigator.pushNamed(context, Routes.REPORT_CATEGORY_SELECTION_SCREEN);
+                      },
                     ),
-                  ],
-                ),
+                  ),
+                ],
               ),
             ),
-            Expanded(
-              flex: 1,
-              child: Padding(
-                padding: const EdgeInsets.all(4.0),
-                child: Card(
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(16.0),
-                  ),
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Card(
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(16.0),
+                ),
+                child: Padding(
+                  padding: const EdgeInsets.all(8.0),
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: <Widget>[
@@ -174,68 +171,65 @@ class HomeScreen extends StatelessWidget {
                 ),
               ),
             ),
-            Expanded(
-              flex: 2,
-              child: Padding(
-                padding: const EdgeInsets.all(4.0),
-                child: Card(
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(16.0),
-                  ),
-                  child: Padding(
-                    padding: const EdgeInsets.all(16.0),
-                    child: Column(
-                      children: <Widget>[
-                        OrderedListItem(
-                          imageAsset: "emergency_lines.png",
-                          textLabel: "Emergency Phone Lines",
-                          callback: () {
-                            Navigator.pushNamed(context, Routes.EMERGENCY_PHONE_LINES_SCREEN);
-                          },
-                        ),
-                        Divider(),
-                        OrderedListItem(
-                          imageAsset: "locate_stations.png",
-                          textLabel: "Locate Police Stations",
-                          callback: () {
-                            Navigator.pushNamed(context, Routes.LOCATE_POLICE_STATION_SCREEN);
-                          },
-                        ),
-                        Divider(),
-                        OrderedListItem(
-                          imageAsset: "most_wanted.png",
-                          textLabel: "Wanted List",
-                          callback: () {
-                            Navigator.pushNamed(context, Routes.WANTED_LIST_SCREEN);
-                          },
-                        ),
-                        Divider(),
-                        OrderedListItem(
-                          imageAsset: "missing_items.png",
-                          textLabel: "Missing Persons/Items",
-                          callback: () {
-                            Navigator.pushNamed(context, Routes.MISSING_PERSONS_SCREEN);
-                          },
-                        ),
-                        Divider(),
-                        OrderedListItem(
-                          imageAsset: "notices.png",
-                          textLabel: "Public Notices",
-                          callback: () {
-                            Navigator.pushNamed(context, Routes.PUBLIC_NOTICE_SCREEN);
-                          },
-                        )
-                      ],
-                    ),
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Card(
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(16.0),
+                ),
+                child: Padding(
+                  padding: const EdgeInsets.all(16.0),
+                  child: Column(
+                    children: <Widget>[
+                      OrderedListItem(
+                        imageAsset: "emergency_lines.png",
+                        textLabel: "Emergency Phone Lines",
+                        callback: () {
+                          Navigator.pushNamed(context, Routes.EMERGENCY_PHONE_LINES_SCREEN);
+                        },
+                      ),
+                      Divider(),
+                      OrderedListItem(
+                        imageAsset: "locate_stations.png",
+                        textLabel: "Locate Police Stations",
+                        callback: () {
+                          Navigator.pushNamed(context, Routes.LOCATE_POLICE_STATION_SCREEN);
+                        },
+                      ),
+                      Divider(),
+                      OrderedListItem(
+                        imageAsset: "most_wanted.png",
+                        textLabel: "Wanted List",
+                        callback: () {
+                          Navigator.pushNamed(context, Routes.WANTED_LIST_SCREEN);
+                        },
+                      ),
+                      Divider(),
+                      OrderedListItem(
+                        imageAsset: "missing_items.png",
+                        textLabel: "Missing Persons/Items",
+                        callback: () {
+                          Navigator.pushNamed(context, Routes.MISSING_PERSONS_SCREEN);
+                        },
+                      ),
+                      Divider(),
+                      OrderedListItem(
+                        imageAsset: "notices.png",
+                        textLabel: "Public Notices",
+                        callback: () {
+                          Navigator.pushNamed(context, Routes.PUBLIC_NOTICE_SCREEN);
+                        },
+                      )
+                    ],
                   ),
                 ),
               ),
             ),
-            Expanded(
-              flex: 1,
-              child: SingleChildScrollView(
-                scrollDirection: Axis.horizontal,
-                child: new Row(
+            SingleChildScrollView(
+              scrollDirection: Axis.horizontal,
+              child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Row(
                   children: allCategories.map((value) {
                     return MiscListItem(
                       title: value.title,
@@ -308,22 +302,25 @@ class HomeScreen extends StatelessWidget {
         borderRadius: BorderRadius.circular(20.0),
       ),
       child: InkWell(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: <Widget>[
-            Padding(
-              padding: const EdgeInsets.all(1.0),
-              child: image,
-            ),
-            Padding(
-              padding: const EdgeInsets.all(1.0),
-              child: Text(
-                text,
-                style: TextStyle(color: Colors.white),
+        child: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: <Widget>[
+              Padding(
+                padding: const EdgeInsets.all(1.0),
+                child: image,
               ),
-            ),
-          ],
+              Padding(
+                padding: const EdgeInsets.all(1.0),
+                child: Text(
+                  text,
+                  style: TextStyle(color: Colors.white),
+                ),
+              ),
+            ],
+          ),
         ),
         onTap: onclick,
       ),

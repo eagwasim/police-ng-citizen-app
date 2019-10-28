@@ -5,6 +5,7 @@ import 'package:flutter/widgets.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:police_citizen_app/http/report-resource.dart';
 import 'package:police_citizen_app/http/response/base-response.dart';
+import 'package:police_citizen_app/utils/navigation-utils.dart';
 import 'package:police_citizen_app/utils/route.dart';
 import 'package:police_citizen_app/utils/shared-preference-util.dart';
 import 'package:police_citizen_app/utils/widget-utils.dart';
@@ -204,9 +205,9 @@ class _SOSInitializationState extends State<SOSInitializationScreen> implements 
 
     Future<Position> futurePosition = Geolocator().getCurrentPosition(desiredAccuracy: LocationAccuracy.high);
 
-    futurePosition.then((position) {
+    futurePosition.then((position) async {
       if (position != null) {
-        ReportResource.sendSOS({'lat': position.latitude, 'lon': position.longitude}, this);
+        ReportResource.sendSOS({'lat': position.latitude, 'lon': position.longitude, 'address': await NavigationUtils.addressFromCoordinates(position.latitude, position.longitude)}, this);
       } else {
         setState(() {
           _isProcessing = false;
