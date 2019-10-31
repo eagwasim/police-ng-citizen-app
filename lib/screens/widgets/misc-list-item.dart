@@ -13,16 +13,16 @@ class MiscListItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: 340,
+      width: 350,
       child: Padding(
-        padding: const EdgeInsets.all(4.0),
+        padding: const EdgeInsets.only(top:0, left:2.0, right: 8),
         child: Card(
 
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(16.0),
           ),
           child: Padding(
-            padding: const EdgeInsets.all(8.0),
+            padding: const EdgeInsets.all(4.0),
             child: InkWell(
               onTap: onclick,
               child: Column(
@@ -33,13 +33,14 @@ class MiscListItem extends StatelessWidget {
                     padding: const EdgeInsets.all(8.0),
                     child: Text(
                       title,
-                      style: TextStyle(color: actionButtonColor, fontWeight: FontWeight.bold, fontSize: 15),
+                      style: TextStyle(color: actionButtonColor, fontWeight: FontWeight.bold, fontSize: 18),
                     ),
                   ),
                   Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: Text(
                       message,
+                      maxLines: 2,
                       style: TextStyle(fontSize: 12),
                     ),
                   ),

@@ -13,7 +13,7 @@ class NavigationUtils {
       User user = await SharedPreferenceUtil.currentUser();
       if (user == null) {
         return Routes.LOGIN_SCREEN;
-      } else if (user.firstName == null || user.emailAddress == null) {
+      } else if (user.firstName == null || user.emailAddress == null || user.gender == null) {
         return Routes.NAME_UPDATE_SCREEN;
       } else {
         return Routes.HOME_SCREEN;

@@ -14,7 +14,7 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   void initState() {
     super.initState();
-    Future.delayed(Duration(seconds: 4), () async {
+    Future.delayed(Duration(seconds: 1), () async {
       String nextRoute = await NavigationUtils.getInitialAppRoute();
       Navigator.pushNamedAndRemoveUntil(context, nextRoute, (Route<dynamic> route) => false);
     });

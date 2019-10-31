@@ -29,9 +29,9 @@ abstract class BaseResource {
         String responseBody = resp.body;
         String errorMessage;
 
-        if (responseBody != null) {
+        if (resp.statusCode > 299) {
           try {
-            Map<String, dynamic> payload = jsonDecode(errorMessage);
+            Map<String, dynamic> payload = jsonDecode(responseBody);
             errorMessage = payload.containsKey("message") ? payload['message'] : null;
           } catch (e) {}
         }
@@ -74,9 +74,53 @@ abstract class BaseResource {
         String responseBody = resp.body;
         String errorMessage;
 
-        if (responseBody != null) {
+        if (resp.statusCode > 299) {
           try {
-            Map<String, dynamic> payload = jsonDecode(errorMessage);
+            Map<String, dynamic> payload = jsonDecode(responseBody);
+            errorMessage = payload.containsKey("message") ? payload['message'] : null;
+          } catch (e) {}
+        }
+        listener.onResponse(
+          BaseResponse(
+            statusCode: resp.statusCode,
+            statusMessage: errorMessage == null ? resp.reasonPhrase : errorMessage,
+            data: responseBody,
+          ),
+        );
+      }, onError: (error) {
+        listener.onResponse(BaseResponse(
+          statusCode: 500,
+          statusMessage: "Could not process your request, check your internet connection",
+          data: null,
+        ));
+      });
+    });
+  }
+
+  static void makeGetRequest(String url, BaseResponseListener listener) {
+    Map<String, String> headers;
+
+    Future<String> authToken = SharedPreferenceUtil.getToken();
+
+    authToken.then((token) {
+      if (token != null) {
+        headers = {"Content-type": "application/json", "Authorization": "Bearer $token"};
+      } else {
+        headers = {"Content-type": "application/json"};
+      }
+
+      Future<http.Response> futureResponse = http.get(
+        BASE_URL + url,
+        headers: headers,
+      );
+
+      futureResponse.then((resp) {
+        String responseBody = resp.body;
+        String errorMessage;
+
+        if (resp.statusCode > 299) {
+          try {
+            Map<String, dynamic> payload = jsonDecode(responseBody);
             errorMessage = payload.containsKey("message") ? payload['message'] : null;
           } catch (e) {}
         }

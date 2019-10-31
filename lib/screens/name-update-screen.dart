@@ -18,11 +18,21 @@ class _NameUpdateState extends State<NameUpdateScreen> implements BaseResponseLi
   var _isProcessing = false;
   var _fullName = "";
   var _email = "";
+  var _gender = "";
 
   User _user;
 
   TextEditingController _controller;
-  TextEditingController _emain_controller;
+  TextEditingController _emailController;
+  TextEditingController _genderController;
+
+  @override
+  void dispose() {
+    super.dispose();
+    _controller.dispose();
+    _emailController.dispose();
+    _genderController.dispose();
+  }
 
   @override
   void initState() {
@@ -44,7 +54,7 @@ class _NameUpdateState extends State<NameUpdateScreen> implements BaseResponseLi
     _controller = new TextEditingController(
       text: _fullName,
     );
-    _emain_controller = new TextEditingController(text: _email);
+    _emailController = new TextEditingController(text: _email);
 
     return Scaffold(
       backgroundColor: Colors.white,
@@ -65,79 +75,107 @@ class _NameUpdateState extends State<NameUpdateScreen> implements BaseResponseLi
           )
         ],
       ),
-      body: Container(
-          decoration: BoxDecoration(color: Colors.white),
-          child: SafeArea(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: <Widget>[
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: TextField(
-                    decoration: InputDecoration(
-                      border: InputBorder.none,
-                      hintText: "Last        First",
-                      hintStyle: TextStyle(
-                        color: Colors.indigo[200],
-                      ),
-                    ),
-                    autofocus: true,
-                    controller: _controller,
-                    keyboardType: TextInputType.text,
-                    style: TextStyle(fontSize: 30),
-                    onChanged: (newValue) {
-                      _fullName = newValue;
-                    },
-                  ),
+      body: ListView(
+        children: <Widget>[
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: TextField(
+              decoration: InputDecoration(
+                border: InputBorder.none,
+                hintText: "Last        First",
+                hintStyle: TextStyle(
+                  color: Colors.indigo[200],
                 ),
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Text(
-                    "Please enter your full name",
-                    style: TextStyle(fontSize: 12),
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: TextField(
-                    decoration: InputDecoration(
-                      border: InputBorder.none,
-                      hintText: "Email Address",
-                      hintStyle: TextStyle(
-                        color: Colors.indigo[200],
-                      ),
-                    ),
-                    autofocus: true,
-                    controller: _emain_controller,
-                    keyboardType: TextInputType.emailAddress,
-                    style: TextStyle(fontSize: 30),
-                    onChanged: (newValue) {
-                      _email = newValue;
-                    },
-                    onSubmitted: (value) {
-                      _email = value;
-                      _doNameUpdate();
-                    },
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Text(
-                    "Please enter your email",
-                    style: TextStyle(fontSize: 12),
-                  ),
-                ),
-              ],
+              ),
+              autofocus: true,
+              controller: _controller,
+              keyboardType: TextInputType.text,
+              style: TextStyle(fontSize: 30),
+              onChanged: (newValue) {
+                _fullName = newValue;
+              },
             ),
-          )),
+          ),
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Text(
+              "Please enter your full name",
+              style: TextStyle(fontSize: 12),
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: TextField(
+              decoration: InputDecoration(
+                border: InputBorder.none,
+                hintText: "Email Address",
+                hintStyle: TextStyle(
+                  color: Colors.indigo[200],
+                ),
+              ),
+              autofocus: true,
+              controller: _emailController,
+              keyboardType: TextInputType.emailAddress,
+              style: TextStyle(fontSize: 30),
+              onChanged: (newValue) {
+                _email = newValue;
+              },
+              onSubmitted: (value) {
+                _email = value;
+              },
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Text(
+              "Please enter your email",
+              style: TextStyle(fontSize: 12),
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: TextField(
+              decoration: InputDecoration(
+                border: InputBorder.none,
+                hintText: "Gender (Male | Female)",
+                hintStyle: TextStyle(
+                  color: Colors.indigo[200],
+                ),
+              ),
+              autofocus: true,
+              controller: _genderController,
+              keyboardType: TextInputType.text,
+              style: TextStyle(fontSize: 30),
+              onChanged: (newValue) {
+                _gender = newValue;
+              },
+              onSubmitted: (value) {
+                _gender = value;
+                _doNameUpdate();
+              },
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Text(
+              "Please enter your gender (male or female)",
+              style: TextStyle(fontSize: 12),
+            ),
+          ),
+        ],
+      ),
     );
   }
 
   void _doNameUpdate() {
     List<String> fullName = _fullName.split(" ");
 
-    if (fullName.length != 2 || fullName[0].length < 3 || fullName[1].length < 3 || !_email.contains("@") || _email.length < 3) {
+    if (fullName.length != 2 ||
+        fullName[0].length < 3 ||
+        fullName[1].length < 3 ||
+        !_email.contains("@") ||
+        _email.length < 3 ||
+        !(_gender.toLowerCase() == "male" || _gender.toLowerCase() == "female")) {
       WidgetUtils.showAlertDialog(context, "Error", "Enter a valid first name and last name");
       return;
     }
@@ -163,6 +201,7 @@ class _NameUpdateState extends State<NameUpdateScreen> implements BaseResponseLi
       _user.firstName = fullName[1];
       _user.lastName = fullName[0];
       _user.emailAddress = _email;
+      _user.gender = _gender;
 
       Future future = SharedPreferenceUtil.saveUser(_user);
       future.then((_) {

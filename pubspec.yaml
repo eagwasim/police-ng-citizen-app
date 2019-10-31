@@ -32,7 +32,9 @@ dependencies:
   camera:
   image_picker:
   path_provider:
+  google_maps_flutter: ^0.4.0
   path:
+  time_formatter: ^1.0.0
   geocoder: ^0.2.1
   flutter_verification_code_input:
     git:

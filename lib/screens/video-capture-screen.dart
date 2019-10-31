@@ -251,7 +251,7 @@ class _VideoCaptureState extends State<VideoCaptureScreen> {
     final String videoDirectory = '${appDirectory.path}/Videos';
     await Directory(videoDirectory).create(recursive: true);
     final String currentTime = DateTime.now().millisecondsSinceEpoch.toString();
-    final String filePath = '$videoDirectory/${currentTime}.mp4';
+    final String filePath = '$videoDirectory/$currentTime.mp4';
 
     try {
       await controller.startVideoRecording(filePath);

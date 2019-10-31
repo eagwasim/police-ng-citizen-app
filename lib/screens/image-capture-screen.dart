@@ -239,7 +239,7 @@ class _ImageCaptureState extends State<ImageCaptureScreen> {
     final String pictureDirectory = '${appDirectory.path}/Pictures';
     await Directory(pictureDirectory).create(recursive: true);
     final String currentTime = DateTime.now().millisecondsSinceEpoch.toString();
-    final String filePath = '$pictureDirectory/${currentTime}.jpg';
+    final String filePath = '$pictureDirectory/$currentTime.jpg';
 
     try {
       await controller.takePicture(filePath);

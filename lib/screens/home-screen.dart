@@ -75,177 +75,173 @@ class HomeScreen extends StatelessWidget {
           ),
         ],
       ),
-      body: SingleChildScrollView(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: <Widget>[
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: <Widget>[
-                  Expanded(
-                    child: _buildHeaderWidgets(
-                      "SOS",
-                      Image.asset(
-                        "assets/images/sos.png",
-                        width: 80,
-                      ),
-                      Colors.red,
-                      () {
-                        Navigator.pushNamed(context, Routes.SOS_INITIALIZATION_SCREEN);
-                      },
+      body: ListView(
+        children: <Widget>[
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: <Widget>[
+                Expanded(
+                  child: _buildHeaderWidgets(
+                    "SOS",
+                    Image.asset(
+                      "assets/images/sos.png",
+                      width: 80,
                     ),
+                    Colors.red,
+                    () {
+                      Navigator.pushNamed(context, Routes.SOS_INITIALIZATION_SCREEN);
+                    },
                   ),
-                  Expanded(
-                    child: _buildHeaderWidgets(
-                      "Report",
-                      Image.asset(
-                        "assets/images/send_report.png",
-                        width: 80,
-                      ),
-                      Colors.indigo,
-                      () {
-                        Navigator.pushNamed(context, Routes.REPORT_CATEGORY_SELECTION_SCREEN);
-                      },
+                ),
+                Expanded(
+                  child: _buildHeaderWidgets(
+                    "Report",
+                    Image.asset(
+                      "assets/images/send_report.png",
+                      width: 80,
                     ),
-                  ),
-                ],
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Card(
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(16.0),
-                ),
-                child: Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: <Widget>[
-                      Row(
-                        children: <Widget>[
-                          Padding(
-                            padding: const EdgeInsets.all(10.0),
-                            child: Text("Quick Report"),
-                          ),
-                          Expanded(
-                            child: Padding(
-                              padding: const EdgeInsets.all(10.0),
-                              child: Divider(
-                                color: Colors.indigo,
-                              ),
-                            ),
-                          )
-                        ],
-                      ),
-                      Row(
-                        children: <Widget>[
-                          QuickReportItem(
-                            image: "record_audio_1.png",
-                            text: "Send Audio",
-                            callback: () {
-                              WidgetUtils.infoToast("Feature not availiable at this time...");
-                            },
-                          ),
-                          QuickReportItem(
-                              image: "take_photo.png",
-                              text: "Send Photo",
-                              callback: () {
-                                _optionsDialogBox(context);
-                              }),
-                          QuickReportItem(
-                            image: "record_video.png",
-                            text: "Send Video",
-                            callback: () {
-                              WidgetUtils.infoToast("Feature not availiable at this time...");
-                            },
-                          )
-                        ],
-                      )
-                    ],
+                    Colors.indigo,
+                    () {
+                      Navigator.pushNamed(context, Routes.REPORT_CATEGORY_SELECTION_SCREEN);
+                    },
                   ),
                 ),
-              ),
+              ],
             ),
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Card(
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(16.0),
-                ),
-                child: Padding(
-                  padding: const EdgeInsets.all(16.0),
-                  child: Column(
-                    children: <Widget>[
-                      OrderedListItem(
-                        imageAsset: "emergency_lines.png",
-                        textLabel: "Emergency Phone Lines",
-                        callback: () {
-                          Navigator.pushNamed(context, Routes.EMERGENCY_PHONE_LINES_SCREEN);
-                        },
-                      ),
-                      Divider(),
-                      OrderedListItem(
-                        imageAsset: "locate_stations.png",
-                        textLabel: "Locate Police Stations",
-                        callback: () {
-                          Navigator.pushNamed(context, Routes.LOCATE_POLICE_STATION_SCREEN);
-                        },
-                      ),
-                      Divider(),
-                      OrderedListItem(
-                        imageAsset: "most_wanted.png",
-                        textLabel: "Wanted List",
-                        callback: () {
-                          Navigator.pushNamed(context, Routes.WANTED_LIST_SCREEN);
-                        },
-                      ),
-                      Divider(),
-                      OrderedListItem(
-                        imageAsset: "missing_items.png",
-                        textLabel: "Missing Persons/Items",
-                        callback: () {
-                          Navigator.pushNamed(context, Routes.MISSING_PERSONS_SCREEN);
-                        },
-                      ),
-                      Divider(),
-                      OrderedListItem(
-                        imageAsset: "notices.png",
-                        textLabel: "Public Notices",
-                        callback: () {
-                          Navigator.pushNamed(context, Routes.PUBLIC_NOTICE_SCREEN);
-                        },
-                      )
-                    ],
-                  ),
-                ),
+          ),
+          Padding(
+            padding: const EdgeInsets.only(top:2, left:8.0, right: 8),
+            child: Card(
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(16.0),
               ),
-            ),
-            SingleChildScrollView(
-              scrollDirection: Axis.horizontal,
               child: Padding(
                 padding: const EdgeInsets.all(8.0),
-                child: Row(
-                  children: allCategories.map((value) {
-                    return MiscListItem(
-                      title: value.title,
-                      message: value.description,
-                      actionButtonColor: value.color,
-                      actionLabel: value.title,
-                      onclick: () {
-                        Navigator.pushNamed(context, Routes.REPORT_SCREEN, arguments: value);
-                      },
-                    );
-                  }).toList(),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: <Widget>[
+                    Row(
+                      children: <Widget>[
+                        Padding(
+                          padding: const EdgeInsets.all(10.0),
+                          child: Text("Quick Report"),
+                        ),
+                        Expanded(
+                          child: Padding(
+                            padding: const EdgeInsets.all(10.0),
+                            child: Divider(
+                              color: Colors.indigo,
+                            ),
+                          ),
+                        )
+                      ],
+                    ),
+                    Row(
+                      children: <Widget>[
+                        QuickReportItem(
+                          image: "record_audio_1.png",
+                          text: "Send Audio",
+                          callback: () {
+                            WidgetUtils.infoToast("Feature not availiable at this time...");
+                          },
+                        ),
+                        QuickReportItem(
+                            image: "take_photo.png",
+                            text: "Send Photo",
+                            callback: () {
+                              _optionsDialogBox(context);
+                            }),
+                        QuickReportItem(
+                          image: "record_video.png",
+                          text: "Send Video",
+                          callback: () {
+                            WidgetUtils.infoToast("Feature not availiable at this time...");
+                          },
+                        )
+                      ],
+                    )
+                  ],
                 ),
               ),
-            )
-          ],
-        ),
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.only(top:2, left:8.0, right: 8),
+            child: Card(
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(16.0),
+              ),
+              child: Padding(
+                padding: const EdgeInsets.all(16.0),
+                child: Column(
+                  children: <Widget>[
+                    OrderedListItem(
+                      imageAsset: "emergency_lines.png",
+                      textLabel: "Emergency Phone Lines",
+                      callback: () {
+                        Navigator.pushNamed(context, Routes.EMERGENCY_PHONE_LINES_SCREEN);
+                      },
+                    ),
+                    Divider(),
+                    OrderedListItem(
+                      imageAsset: "locate_stations.png",
+                      textLabel: "Locate Police Stations",
+                      callback: () {
+                        Navigator.pushNamed(context, Routes.LOCATE_POLICE_STATION_SCREEN);
+                      },
+                    ),
+                    Divider(),
+                    OrderedListItem(
+                      imageAsset: "most_wanted.png",
+                      textLabel: "Wanted List",
+                      callback: () {
+                        Navigator.pushNamed(context, Routes.WANTED_LIST_SCREEN);
+                      },
+                    ),
+                    Divider(),
+                    OrderedListItem(
+                      imageAsset: "missing_items.png",
+                      textLabel: "Missing Persons/Items",
+                      callback: () {
+                        Navigator.pushNamed(context, Routes.MISSING_PERSONS_SCREEN);
+                      },
+                    ),
+                    Divider(),
+                    OrderedListItem(
+                      imageAsset: "notices.png",
+                      textLabel: "Public Notices",
+                      callback: () {
+                        Navigator.pushNamed(context, Routes.PUBLIC_NOTICE_SCREEN);
+                      },
+                    )
+                  ],
+                ),
+              ),
+            ),
+          ),
+          SingleChildScrollView(
+            scrollDirection: Axis.horizontal,
+            child: Padding(
+              padding: const EdgeInsets.only(top:2, left:8.0, right: 8),
+              child: Row(
+                children: allCategories.map((value) {
+                  return MiscListItem(
+                    title: value.title,
+                    message: value.description,
+                    actionButtonColor: value.color,
+                    actionLabel: value.title,
+                    onclick: () {
+                      Navigator.pushNamed(context, Routes.REPORT_SCREEN, arguments: value);
+                    },
+                  );
+                }).toList(),
+              ),
+            ),
+          )
+        ],
       ),
     );
   }

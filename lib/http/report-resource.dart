@@ -25,4 +25,8 @@ class ReportResource {
   static void sendReportUpdate(String reportId, Map<String, dynamic> payload, BaseResponseListener listener) {
     BaseResource.makePutRequest("$REPORT_CONTEXT_PATH/$reportId", jsonEncode(payload), listener);
   }
+
+  static void getUserReport(BaseResponseListener listener) {
+    BaseResource.makeGetRequest("$REPORT_CONTEXT_PATH", listener);
+  }
 }

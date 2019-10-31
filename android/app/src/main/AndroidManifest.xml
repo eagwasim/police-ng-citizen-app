@@ -17,6 +17,8 @@
         android:name="io.flutter.app.FlutterApplication"
         android:icon="@mipmap/ic_launcher"
         android:label="Police NG">
+        <meta-data android:name="com.google.android.geo.API_KEY"
+            android:value="AIzaSyDCdASkxsfQ_Qa1taCZ2XqP3ms0WQJxIwg"/>
         <activity
             android:name=".MainActivity"
             android:screenOrientation="portrait"
